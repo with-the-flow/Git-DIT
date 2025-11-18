@@ -20,13 +20,13 @@ class MainMenuNavigation:
         """交互式选择菜单 - 渲染完整边框界面"""
         selected_index = 0
         
-        # 创建自定义样式：标题不使用蓝色背景，高亮只改变文字为绿色，键提示保持白色
+        # 创建自定义样式
         style = Style.from_dict({
             'border': '#ansiblue',
-            'title': '#ffffff bold',
-            'highlight': '#00aa00 bold',
+            'title': 'bg:#000080 #ffffff bold',
+            'highlight': 'bg:#00aa00 #ffffff bold',
             'normal': '#ansigray',
-            'keyhint': '#ffffff',
+            'keyhint': '#ansiyellow',
         })
         
         # 创建键绑定
