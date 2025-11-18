@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "git-dit"
+version = "1.0.0"
+description = "通过文本图形化显示 Git 提交历史的命令行工具"
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [ { name = "git-dit contributors" } ]
+requires-python = ">=3.8"
+keywords = ["git", "cli", "tui", "visualization"]
+
+[tool.setuptools.packages.find]
+where = ["src"]

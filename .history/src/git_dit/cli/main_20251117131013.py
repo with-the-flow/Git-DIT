@@ -23,8 +23,8 @@ print("+---------------------------------------------+")
 print("|             Git-DIT Terminal UI             |")
 print("| A simple and powerful ASCII-based Git client|")
 print("| for your terminal environment.              |")
-print(f"| Git Version: {version}                         |")
-print("| Press [ENTER] to begin...                   |")
+print(f"| Git Version: {version} |")
+print("| Press [ENTER] to begin...                  |")
 print("+---------------------------------------------+")
 
 users_input = input()  # 等待用户按下回车键
