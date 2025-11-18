@@ -46,11 +46,21 @@ class MainMenuNavigation:
         def move_up(event):
             nonlocal selected_index
             selected_index = (selected_index - 1) % len(self.options)
+            # 立即请求重绘，确保高亮随选择变化更新
+            try:
+                event.app.invalidate()
+            except Exception:
+                pass
         
         @kb.add('down')
         def move_down(event):
             nonlocal selected_index
             selected_index = (selected_index + 1) % len(self.options)
+            # 立即请求重绘，确保高亮随选择变化更新
+            try:
+                event.app.invalidate()
+            except Exception:
+                pass
         
         @kb.add('enter')
         def select(event):
@@ -61,15 +71,15 @@ class MainMenuNavigation:
         def exit_(event):
             event.app.exit(result=None)
         
-        # 构建显示文本
+        # 构建显示文本 - 关键修复：返回样式元组列表
         def get_formatted_text():
-            result = []
+            fragments = []
             for i, option in enumerate(self.options):
                 if i == selected_index:
-                    result.append(HTML(f'<highlight>▶ {i+1}. {option}</highlight>\n'))
+                    fragments.append(('class:highlight', f'▶ {i+1}. {option}\n'))
                 else:
-                    result.append(HTML(f'<normal>  {i+1}. {option}</normal>\n'))
-            return result
+                    fragments.append(('class:normal', f'  {i+1}. {option}\n'))
+            return fragments
         
         # 创建应用
         control = FormattedTextControl(get_formatted_text)
@@ -96,7 +106,6 @@ class MainMenuNavigation:
         
         if selected is not None:
             print(f"\n您选择了: {self.options[selected]} (索引: {selected})")
-            # 这里添加实际的处理逻辑
             self.handle_selection(selected)
         else:
             print("\n操作被取消")
@@ -115,10 +124,9 @@ class MainMenuNavigation:
         if action:
             action()
     
-    # 示例方法（你需要实现具体逻辑）
+    # 示例方法
     def check_repo_status(self):
         print("正在执行：仓库状态查看")
-        # subprocess.run(["git", "status"])
     
     def manage_files(self):
         print("正在执行：文件操作管理")
